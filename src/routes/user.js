@@ -1,17 +1,15 @@
 const express = require("express");
+const { createUser, getUsers,getUserByID, updateUser, deleteUser} = require('../controllers/user');
+
 const userSchema = require("../models/user");
 
 const router = express.Router();
 
-// endpoint crear usuario
-router.post('/users', (req,res)=> {
-    
-   const user = userSchema(req.body);
-   user
-   .save()
-   .then((data) => res.json(data))
-   .catch((error) => res.json({ message: error }));
-
-});
+// endpoints de usuarios
+router.post('/users', createUser);
+router.get('/users', getUsers);
+router.get('/users/:id', getUserByID);
+router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
 
 module.exports = router;
