@@ -1,5 +1,9 @@
 const formElement = document.getElementById("saveUser");
-
+const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    "Content-Type": "application/json",
+  };
 formElement.addEventListener("submit", (event) => {
     //no hacer lo que hace el boton submit por default que es recargar la pagina
     event.preventDefault();
@@ -12,9 +16,10 @@ formElement.addEventListener("submit", (event) => {
     //convierto el objeto a JSON
     let userJson = JSON.stringify(user);
     //enviar los datos al backend
-    //console.log(userJson);  
+    console.log(userJson);  
     fetch('http://localhost:3001/api/users',{
         method: 'Post',
+        headers: headers,
         body: userJson
     })
 })
